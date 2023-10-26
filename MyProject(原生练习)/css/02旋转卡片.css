@@ -1,0 +1,80 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    /* 弹性布局，居中显示 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* 设置body宽高为100%显示器宽高 */
+    height: 100vh;
+    /* 背景色渐变 */
+    background-image: linear-gradient(200deg,#5ee7df,#b490ca);
+    perspective: 1000px;
+}
+
+.card{
+    /* 相对定位 */
+    position: relative;
+    width: 300px;
+    height: 450px;
+    /* 圆角 */
+    border-radius: 30px;
+    /* 鼠标悬停变成小手指针 */
+    cursor: pointer;
+    background-color: #fff;
+    /* 盒子阴影 */
+    box-shadow: 1px 1px 20px rgba(0,0,0,0.1);
+    transform-style: preserve-3d;
+    /* 给卡片加一个默认动画 */
+    animation: rotate-reverse 1.2s cubic-bezier(0.66,-0.47,0.33,1.5) forwards;
+    
+}
+.card:hover{
+    animation: rotate 1.2s cubic-bezier(0.66,-0.47,0.33,1.5) forwards;
+}
+.front,.back{
+    /* 绝对定位 父元素是相对定位，子元素需要绝对定位 */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* 弹性布局，将元素转换为块级元素，独占一行使其垂直排列 */
+    display: flex;
+    flex-direction: column;
+    /*让子元素水平居中*/
+    align-items: center;
+    /* 平均分配每一个子元素相同的空间 */
+    justify-content: space-around;
+    font-size: 20px;
+    /* 背景色和边框圆角 */
+    background-color: #fff;
+    border-radius: 30px;
+    /* 隐藏旋转DIV元素的背面 */
+    backface-visibility: hidden;
+}
+
+.back{
+    transform: rotateY(180deg);
+}
+
+
+/* 定义动画 */
+@keyframes rotate{
+    0%{
+        transform: rotateY(0deg);
+    }
+    100%{
+        transform: rotateY(180deg);
+    }
+}
+@keyframes rotate-reverse{
+    0%{
+        transform: rotateY(180deg);
+    }
+    100%{
+        transform: rotateY(0deg);
+    }
+}

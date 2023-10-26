@@ -1,0 +1,100 @@
+/* 初始化浏览器样式 */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* 设置包裹所有元素的 */
+body {
+    /* 背景色设置为中间向两边渐变 */
+    background: radial-gradient(circle at center, #555, #000);
+    /* 常规操作，弹性布局 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* 子元素垂直排列*/
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+}
+
+body a {
+    /* 相对定位啦 */
+    position: relative;
+    /* 转换成块级元素 并设置宽高*/
+    display: block;
+    width: 140px;
+    height: 60px;
+    /* 行高 */
+    line-height: 60px;
+    /* 去除下划线 */
+    text-decoration: none;
+    /* 文字水平居中 */
+    text-align: center;
+    margin: 40px;
+    color: plum;
+    /* 文字宽度 */
+    font-size: 20px;
+    /* 定义一个动画过渡 */
+    transition: all 0.3 ease-in-out;
+    /* 定义自定义属性 */
+    /* hue-rotate使眼色滤镜夹不同的度数来改变颜色，calc自动计算函数，以及var函数来调用给a元素设置的不同自定义书性1~5，然后分别乘以60度，就能够分别的道不同的颜色 */
+    filter: hue-rotate(calc(var(--i)*60deg));
+}
+
+/* 伪元素相同样式集合编写，提升代码可读性 */
+a::before,
+a::after {
+    /* 向伪元素中添加什么内容，此处值为空伪元素内没有内容 */
+    content: "";
+    /* 绝对定位 */
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 2px solid plum;
+    /* 给伪元素也要加一个过渡动画，使线条看上去是延展开的 注：过度动画的意思是改变样式的时候用多久完成*/
+    transition: all 0.3s ease-in-out 0.3s;
+}
+a::after {
+    /* 设置上左距离父元素的高度 使之到达指定位置 */
+    top: 0;
+    left: 0;
+    /* 刪除左边和下面的边框 */
+    border-right: 0;
+    border-bottom: 0;
+}
+a::before{
+    right: 0;
+    bottom: 0;
+    /* 删除元素的左、上边框 */
+    border-top: 0;
+    border-left: 0;
+}
+
+/* 鼠标悬停事件 */
+
+a:hover{
+    background-color: plum;
+    color: #000;
+    /* 设置粉色阴影做出泛光效果 */
+    box-shadow: 0 0 50px plum;
+    /* 设置倒影 below是下倒影1px是倒影与元素的距离 最后一个是渐变 */
+    -webkit-box-reflect: below 1px linear-gradient(transparent,rgba(0,0,0,0.3));
+    /* 为上述属性设置延时时间，即多久之后开始执行动画 */
+    transition-delay: 0.4s;
+}
+/* 设置伪元素的宽高和播放延迟 */
+a:hover::before,
+a:hover::after{
+    /* 这里设置伪元素鼠标悬停后的长度 */
+    width: 138px;
+    height: 58px;
+    /* 这里不需要延迟 */
+    transition-delay: 0s;
+}
+
+/* 此代码笔记 */
+/* 伪元素类似于真实元素的镜像，依附于真实元素，并且不占文档空间，只做样式展示并不具有实际的实体 */
+/* transiton-delay设置元素在多久后改变样式 */
+/* transition设置过度动画，使动画缓慢播放，ease-in-out表示动画播放时和退出时全部进行过渡操作 */
+/* webkit是声明浏览器内核类型，现在浏览器已经大多支持所有css样式，所以前缀已经不是必要的了 */
